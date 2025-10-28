@@ -1,4 +1,4 @@
-FROM ghcr.io/nekomeowww/oci-images-machine-learning-torch-py3.13-cu13.0-2.9.0:0.0.1 AS build
+FROM ghcr.io/nekomeowww/oci-ml-pytorch:py3.13-cu13.0-2.9.0 AS build
 
 WORKDIR /app
 

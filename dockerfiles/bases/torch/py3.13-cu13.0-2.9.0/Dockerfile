@@ -1,4 +1,4 @@
-FROM ghcr.io/nekomeowww/oci-images-machine-learning-nvidia-cuda-py3.13-cu13.0:0.0.1 AS build
+FROM ghcr.io/nekomeowww/oci-ml-nvidia-cuda:py3.13-13.0 AS build
 
 WORKDIR /app
 

@@ -1,4 +1,4 @@
-FROM ghcr.io/nekomeowww/oci-images-machine-learning-python-3.13:0.0.1 AS build
+FROM ghcr.io/nekomeowww/oci-ml-python:3.13 AS build
 
 WORKDIR /app
 
