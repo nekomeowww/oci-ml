@@ -6,7 +6,3 @@ COPY ./dockerfiles/bases/torch/py3.13-cu13.0-2.9.0/pixi.toml .
 COPY ./dockerfiles/bases/torch/py3.13-cu13.0-2.9.0/pixi.lock .
 
 RUN --mount=type=cache,target=/root/.cache/rattler/cache,sharing=private pixi install
-RUN printf '#!/bin/sh\n%s\nexec "$@"' "$(pixi shell-hook)" > /entrypoint.sh
-RUN chmod +x /entrypoint.sh
-
-ENTRYPOINT ["/entrypoint.sh", "python"]

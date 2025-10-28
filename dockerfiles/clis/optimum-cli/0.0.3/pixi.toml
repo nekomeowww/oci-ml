@@ -26,3 +26,4 @@ torchvision = { version = ">=0.24.0, <0.25", index = "https://download.pytorch.o
 onnx = ">=1.19.1, <2"
 onnxslim = ">=0.1.72, <0.2"
 onnxruntime = ">=1.23.2, <2"
+optimum-onnx = { version = ">=0.0.3, <0.0.4", extras = ["onnxruntime"] }
