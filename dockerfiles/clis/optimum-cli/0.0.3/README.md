@@ -1,15 +1,20 @@
-# `optimum-cli`
+# `oci-ml-optimum-cli`
 
-```shell
-$ docker run --rm -it ghcr.io/nekomeowww/oci-images-machine-learning-optimum-cli:0.0.1 --help
-usage: optimum-cli
+Container image for the Hugging Face Optimum CLI with CUDA-enabled ONNX Runtime
+support.
 
-positional arguments:
-  {export,env,onnxruntime}
-    export              Export PyTorch models to several format.
-    env                 Get information about the environment used.
-    onnxruntime         ONNX Runtime optimize and quantize utilities.
+- Image: `ghcr.io/nekomeowww/oci-ml-optimum-cli:0.0.3`
+- Base image: `ghcr.io/nekomeowww/oci-ml-onnxruntime:py3.13-cu13.0-torch2.9.0-1.23.2`
 
-options:
-  -h, --help            show this help message and exit
+## Dependencies (build chain)
+
+1. `ghcr.io/nekomeowww/oci-ml-onnxruntime:py3.13-cu13.0-torch2.9.0-1.23.2`
+2. `ghcr.io/nekomeowww/oci-ml-pytorch:py3.13-cu13.0-2.9.0`
+3. `ghcr.io/nekomeowww/oci-ml-nvidia-cuda:py3.13-13.0`
+4. `ghcr.io/nekomeowww/oci-ml-python:3.13`
+
+## Usage
+
+```bash
+docker run --rm -it ghcr.io/nekomeowww/oci-ml-optimum-cli:0.0.3 --help
 ```
