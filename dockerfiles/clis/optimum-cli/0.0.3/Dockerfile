@@ -9,4 +9,4 @@ RUN --mount=type=cache,target=/root/.cache/rattler/cache,sharing=private pixi in
 RUN printf '#!/bin/sh\n%s\nexec "$@"' "$(pixi shell-hook)" > /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
-ENTRYPOINT ["/entrypoint.sh", "python"]
+ENTRYPOINT ["/entrypoint.sh", "optimum-cli"]
