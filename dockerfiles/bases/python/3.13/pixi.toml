@@ -1,7 +1,7 @@
 [workspace]
 authors = ["Neko Ayaka <neko@ayaka.moe>"]
 channels = ["conda-forge"]
-name = "optimum-cli"
+name = "env"
 platforms = ["linux-64", "linux-aarch64"]
 version = "0.1.0"
 
@@ -10,9 +10,3 @@ version = "0.1.0"
 [dependencies]
 python = "3.13.*"
 pip = ">=25.2,<26"
-
-[pypi-dependencies]
-optimum-onnx = { version = ">=0.0.3, <0.0.4", extras = ["onnxruntime"] }
-onnx = ">=1.19.1, <2"
-onnxslim = ">=0.1.72, <0.2"
-onnxruntime = ">=1.23.2, <2"
