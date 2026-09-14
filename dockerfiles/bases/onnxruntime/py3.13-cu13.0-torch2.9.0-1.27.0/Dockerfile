@@ -4,7 +4,10 @@ FROM ghcr.io/nekomeowww/oci-ml-pytorch:py3.13-cu13.0-2.9.0 AS build
 COPY --from=ghcr.io/prefix-dev/pixi:0.73.0 /usr/local/bin/pixi /usr/local/bin/pixi
 
 # Pixi uses the system trust store for HTTPS downloads.
-COPY --from=ghcr.io/prefix-dev/pixi:0.73.0 /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends ca-certificates \
+    && update-ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
