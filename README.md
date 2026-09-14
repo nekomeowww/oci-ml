@@ -23,7 +23,7 @@ dependency graph.
 ## Building locally
 
 Use Docker Buildx (or regular `docker build`) from the repository root. The
-helper script below rebuilds the current stack in dependency order:
+helper script below rebuilds the current GPU stack for `linux/amd64` in dependency order:
 
 ```bash
 ./dockerfiles/clis/optimum-cli/0.0.3/build.sh
