@@ -20,6 +20,10 @@ higher level tooling built on top of them.
 See [source](./dockerfiles/clis/optimum-cli/README.md) for available tags and
 dependency graph.
 
+### `modal`
+
+See [source](./dockerfiles/clis/modal/README.md) for available tags.
+
 ## Building locally
 
 Use Docker Buildx (or regular `docker build`) from the repository root. The
