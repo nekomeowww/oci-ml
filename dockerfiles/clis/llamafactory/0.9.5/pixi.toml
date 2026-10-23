@@ -1,0 +1,46 @@
+[workspace]
+authors = ["Neko Ayaka <neko@ayaka.moe>"]
+channels = ["conda-forge"]
+name = "env"
+platforms = ["linux-64"]
+version = "0.1.0"
+
+[tasks]
+
+[dependencies]
+# Same Python as the PyTorch base. A newer patch release makes Pixi reinstall every
+# PyPI package, including PyTorch and the CUDA wheels, in this layer.
+python = "==3.13.9"
+pip = ">=25.2,<26"
+
+[target.linux-64.dependencies]
+cuda = ">=13.0.2,<14"
+cuda-cupti = ">=13.0.85,<14"
+cuda-libraries-dev = ">=13.0.2,<14"
+cuda-nvcc = ">=13.0.88,<14"
+cuda-nvtx = ">=13.0.85,<14"
+# Triton compiles a small C launcher for every kernel at runtime and looks for
+# `gcc` on PATH, so the image needs a C compiler even without building wheels.
+# The base already has the GCC 15.2 toolchain for nvcc; this adds the `gcc` name.
+gcc = ">=15.2,<15.3"
+# `cuda-compiler` depends on an unconstrained `c-compiler`, and the base resolved it
+# to 1.0.0 (2019), whose `bin/gcc` points to a compiler that is not installed.
+# It owns the same path as `gcc`, so Pixi keeps the dangling link unless it is newer.
+c-compiler = ">=1.9"
+
+[target.linux-64.pypi-dependencies]
+# Pinned to the versions in the PyTorch base so this layer reuses them instead of
+# installing a second PyTorch.
+torch = { version = "==2.9.0", index = "https://download.pytorch.org/whl/cu130" }
+torchvision = { version = "==0.24.0", index = "https://download.pytorch.org/whl/cu130" }
+torchaudio = { version = "==2.9.0", index = "https://download.pytorch.org/whl/cu130" }
+
+[pypi-dependencies]
+llamafactory = "==0.9.5"
+# LLaMA-Factory 0.9.5 accepts transformers<=5.6.0, but 5.6.0 breaks the
+# FlashAttention path (hiyouga/LLaMA-Factory#10610) and later releases exclude it.
+# 5.5 already ships the qwen3_5_moe architecture used by Qwen3.6.
+transformers = ">=5.5.4,<5.6"
+# Gated DeltaNet kernels for hybrid linear-attention models such as Qwen3.5 / Qwen3.6.
+# 0.6.0 requires transformers>=5.6.2, which LLaMA-Factory 0.9.5 (<=5.6.0) excludes.
+flash-linear-attention = "==0.5.2"
