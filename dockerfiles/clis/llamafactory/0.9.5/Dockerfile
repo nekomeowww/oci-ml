@@ -1,13 +1,4 @@
-FROM ghcr.io/nekomeowww/oci-ml-pytorch:py3.13-cu13.0-2.9.0 AS build
-
-# The published PyTorch base predates lockfile v7 support.
-COPY --from=ghcr.io/prefix-dev/pixi:0.73.0 /usr/local/bin/pixi /usr/local/bin/pixi
-
-# Pixi uses the system trust store for HTTPS downloads.
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends ca-certificates \
-    && update-ca-certificates \
-    && rm -rf /var/lib/apt/lists/*
+FROM ghcr.io/nekomeowww/oci-ml-pytorch:py3.13-cu13.0-2.10.0 AS build
 
 WORKDIR /app
 
