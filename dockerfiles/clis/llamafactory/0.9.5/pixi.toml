@@ -39,3 +39,7 @@ transformers = ">=5.5.4,<5.6"
 # Gated DeltaNet kernels for hybrid linear-attention models such as Qwen3.5 / Qwen3.6.
 # 0.6.0 requires transformers>=5.6.2, which LLaMA-Factory 0.9.5 (<=5.6.0) excludes.
 flash-linear-attention = "==0.5.2"
+# Triton >= 3.4.0 and < 3.7.1 computes the gated chunk backward wrongly on Hopper
+# (fla-org/flash-linear-attention#640), and torch 2.10 pins Triton 3.6.0. With tilelang
+# installed, fla runs that kernel on TileLang instead (JIT-compiled with the env's nvcc).
+tilelang = "==0.1.15"
