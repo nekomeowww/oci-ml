@@ -23,7 +23,7 @@ Modal driver requires an explicit command, so training Jobs run the image this w
 | `transformers` | 5.5.x | 5.6.0 breaks the FlashAttention path ([LLaMA-Factory#10610](https://github.com/hiyouga/LLaMA-Factory/issues/10610)); 5.5 already has `qwen3_5_moe` (Qwen3.6) |
 | `flash-linear-attention` | 0.5.2 | Gated DeltaNet kernels for Qwen3.5 / Qwen3.6; 0.6.0 needs transformers>=5.6.2 |
 | `tilelang` | 0.1.15 | Triton 3.4.0–3.7.0 computes the gated chunk backward wrongly on Hopper ([fla#640](https://github.com/fla-org/flash-linear-attention/issues/640)) and torch 2.10 pins Triton 3.6.0; fla runs that kernel on TileLang instead, compiled with the env's `nvcc` |
-| `gcc` / `c-compiler` (conda-forge) | 15.2 / 2.0 | Same as the base: Triton compiles a C launcher for each kernel at runtime |
+| `gcc` / `gxx` / `c-compiler` / `cxx-compiler` (conda-forge) | 15.2 / 15.2 / 2.0 / 2.0 | Triton compiles a C launcher and tilelang runs `nvcc -ccbin=g++` at runtime. The base resolved `cxx-compiler` 1.0.0, whose `bin/g++` is a dangling link; a Kubernetes command skips the entrypoint's Pixi activation, so `CXX` is unset and tilelang needs a working `g++` on `PATH` |
 
 The lock file started from the PyTorch base's lock, so Python, CUDA, and PyTorch
 keep the base's exact builds and this layer only adds about 1.4 GB. When you
