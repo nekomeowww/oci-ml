@@ -24,6 +24,11 @@ dependency graph.
 
 See [source](./dockerfiles/clis/modal/README.md) for available tags.
 
+### `llamafactory-cli`
+
+See [source](./dockerfiles/clis/llamafactory/README.md) for available tags and
+pinned packages.
+
 ## Building locally
 
 Use Docker Buildx (or regular `docker build`) from the repository root. The
