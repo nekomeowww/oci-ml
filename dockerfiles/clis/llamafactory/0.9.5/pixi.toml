@@ -22,6 +22,11 @@ cuda-nvtx = ">=13.0.85,<14"
 # Same compiler pins as the PyTorch base (Triton needs `gcc` at runtime).
 gcc = ">=15.2,<15.3"
 c-compiler = ">=1.9"
+# tilelang JIT-compiles with `nvcc -ccbin=<C++ compiler>` and looks for `g++` on PATH when CXX is unset,
+# which is the case when a Kubernetes command replaces the entrypoint (no Pixi activation).
+# Like c-compiler, cxx-compiler resolved to 1.0.0, whose bin/g++ and bin/c++ are dangling links.
+gxx = ">=15.2,<15.3"
+cxx-compiler = ">=1.9"
 
 [target.linux-64.pypi-dependencies]
 # Pinned to the versions in the PyTorch base so this layer reuses them instead of
